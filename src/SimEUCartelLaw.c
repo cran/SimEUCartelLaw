@@ -7,7 +7,7 @@
 #include <R_ext/Applic.h>
 #include <R_ext/Callbacks.h>
 
-#define MyEPS sqrt(DOUBLE_EPS)
+#define MyEPS sqrt(DBL_EPSILON)
 
 double rtunifur(double lb1, double rb1, double lb2, double rb2, int truncate,   // simulate (truncated) uniform distribution based on unifrand
                 double unifrand) {
