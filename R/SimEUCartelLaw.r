@@ -17,9 +17,7 @@
 #' @param seed numeric scalar containing the random seed for the
 #' simulation. Defaults to \code{1} in order to make results reproducible.
 #' @return A dataframe  containing the realized output of the simulation.
-#' @importFrom rgl decorate3d view3d rotationMatrix
 #' @importFrom plot3D scatter3D
-#' @importFrom plot3Drgl scatter3Drgl
 #' @importFrom stats sd
 #' @rdname SimEUCartelLawfunction
 #' @examples
@@ -166,57 +164,6 @@ CorrStudySplit <- function(params,m=1e5,rho=seq(0.1,0.9,by=0.2),
                              each=nb+1),
                          rep(c(levels(idx),"Overall"),times=2))
   out                                                                           # return results
-}
-
-#' Visualize results of simulation of legal exemption system
-#' 
-#' \code{RglPlot} visualizes the results of the simulation of the legal 
-#' exemption system using 3D-projections and corresponding 3D-plots.
-#'
-#' \code{RglPlot} visualizes the results of the simulation of the legal 
-#' exemption system using 3D-projections and corresponding 3D-plots using
-#' \code{rgl}/\code{GL} to produce real 3D plots which can be rotated or
-#' zoomed in/out by the user, even in browser windows via \code{WebGL}.
-#'
-#' @param res dataframe containing results of simulation using \code{LEgame}.
-#' @param xvar character scalar containing variable for the x-axis.
-#' Defaults to \code{"rA"}, the simulated illegal gain.
-#' @param yvar character scalar containing variable for the y-axis.
-#' Defaults to \code{"rM"}, the simulated fine.
-#' @param zvar character scalar containing variable for the z-axis.
-#' Defaults to \code{"c"}, the complicance level.
-#' @param xf numeric scalar containing scaling constant for the x-axis. Defaults
-#' to \code{1}.
-#' @param yf numeric scalar containing scaling constant for the y-axis. Defaults
-#' to \code{1}.
-#' @param zf numeric scalar containing scaling constant for the z-axis. Defaults
-#' to \code{1}.
-#' @param userMatrix matrix containing information about the initial perspective
-#' used for the plot. Defaults to \code{rotationMatrix(1.3,-1,0.28, 0.4)}.
-#' @param fov numeric scalar containing the field-of-view angle in degrees.
-#' Defaults to \code{30}.
-#' @param zoom numeric scalar containing the zoom factor. Defaults to 
-#' \code{0.95}.
-#' @return Nothing useful, function called for its side effects.
-#' @examples
-#' \donttest{
-#' Par <- list(Phi=c(0.1,0.5), Rho=c(0.5,0.9), Ksi=c(0.05,0.3), Chi=c(0.1,0.4),
-#'             M=c(0.2,1.2), G=c(0.05,0.2), A=c(0.1,0.3))
-#' RglPlot(LEgame(params=Par, m=10000))
-#' }
-#' @export RglPlot
-RglPlot <- function(res,xvar="rA",yvar="rM",zvar="c",xf=1,yf=1,zf=1,
-                    userMatrix=rotationMatrix(1.3,-1,0.28, 0.4),fov=30,
-                    zoom=0.95) {
-  res <- cbind(res,oc=(1-res[,"c"])*res[,"rA"])                                 # calculate expected illegal gain
-  NiceNames <- c(rA="illegal gain",rM="fine",c="compliance",p1=expression(p[I]),# define nice labels
-                 p2=expression(p[II]),rrho=expression(rho),rphi=expression(phi),
-                 rksi=expression(xi),rG="G",rchi=expression(chi),
-                 oc="expected illegal gain")
-  scatter3Drgl(xf*res[,xvar],yf*res[,yvar],zf*res[,zvar],pch=".",               # create the plot
-               xlab=NiceNames[xvar],ylab=NiceNames[yvar],main=NiceNames[zvar],
-               zlab="")
-  view3d(userMatrix=userMatrix,fov=fov,zoom=zoom)                               # start with good perspective
 }
 
 #' Visualize results of simulation of legal exemption system

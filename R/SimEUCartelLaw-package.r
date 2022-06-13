@@ -21,7 +21,6 @@
 #' print(CorrStudy(params=Par, m=10000))
 #' print(CorrStudySplit(params=Par, m=10000))
 #' \donttest{
-#' RglPlot(LEgame(params=Par, m=10000))
 #' NoRglPlot(LEgame(params=Par, m=10000))
 #' }
 #'

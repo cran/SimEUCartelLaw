@@ -10,10 +10,10 @@ SimEUCartelLaw implements simulation methods for the legal exemption system
 fot the European cartel law.
 }
 \details{
-SimEUCartelLaw implements Monte Carlo simulations of a game-theoretic model 
-for the legal exemption system of the European cartel in order to 
+SimEUCartelLaw implements Monte Carlo simulations of a game-theoretic model
+for the legal exemption system of the European cartel in order to
 estimate the (mean) deterrent effect of this system.
-The input and output parameters of the simulated cartel opportunities 
+The input and output parameters of the simulated cartel opportunities
 can be visualized by three-dimensional projections.
 }
 \examples{
@@ -24,7 +24,6 @@ print(aggResults(res))
 print(CorrStudy(params=Par, m=10000))
 print(CorrStudySplit(params=Par, m=10000))
 \donttest{
-RglPlot(LEgame(params=Par, m=10000))
 NoRglPlot(LEgame(params=Par, m=10000))
 }
 
